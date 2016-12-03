@@ -25,6 +25,8 @@ public class Kargo_Premils {
 		cdriver.findElement(By.linkText("Website")).click();
 		
 		cdriver.findElement(By.className("nav-button__bar")).click();
+		System.out.println(cdriver.findElement(By.id("menu-item-6427")).getText());
+		System.out.println("what the fuck");
 		//Keys ky = new Keys();
 		//mike.sendKeys(Keys.RETURN);
 		
