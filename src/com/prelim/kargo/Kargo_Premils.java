@@ -27,11 +27,8 @@ public class Kargo_Premils {
 		cdriver = new ChromeDriver();
 		cdriver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		
-		googleSearch("kargo");
-		navigate_KargoAbout_Page();
-		for(String keyWord : keyWord_Capture()){
-			googleSearch(keyWord);
-		}
+		navigate_KargoAbout_Page_via_Google();
+		search_Keywords_From_File();
 	}
 	
 	public static void googleSearch(String searchTerm){
@@ -39,7 +36,7 @@ public class Kargo_Premils {
 		cdriver.findElement(By.id("lst-ib")).sendKeys(searchTerm + Keys.RETURN);
 	}
 	
-	public static void navigate_KargoAbout_Page(){
+	public static void navigate_KargoAbout_Page_via_Google(){
 		googleSearch("kargo");
 		cdriver.findElement(By.linkText("Website")).click();
 		cdriver.findElement(By.className("nav-button__bar")).click();
@@ -61,7 +58,7 @@ public class Kargo_Premils {
 		}
 	}
 	
-	public static ArrayList<String> keyWord_Capture(){
+	public static void search_Keywords_From_File(){
 		//Purposely wanted to use a dynamic array list for scalability
 		ArrayList<String> keyWords_Captured = new ArrayList<String>();
 		String fileLocation = "Keywords.txt";
@@ -76,7 +73,10 @@ public class Kargo_Premils {
 		} catch (IOException e){
 			e.printStackTrace();
 		}	
-		return keyWords_Captured;
+	
+		for(String keyWord : keyWords_Captured){
+			googleSearch(keyWord);
+		}
 	}
 
 }
