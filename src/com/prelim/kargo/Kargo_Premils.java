@@ -1,7 +1,6 @@
 package com.prelim.kargo;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -15,42 +14,41 @@ import java.util.concurrent.TimeUnit;
 
 public class Kargo_Premils {
 
+	//Please configure 'chromeDriverLoc' variable with location of ChromeDriver
+	private static String chromeDriverLoc = "/Users/NewUser/Downloads/Automation/chromedriver";
+	private static WebDriver cdriver = null;
+	
 	public static void main(String[] args) {
 		
-		String chromeDriverLoc = "/Users/NewUser/Downloads/Automation/chromedriver";
-		System.setProperty("webdriver.chrome.driver", chromeDriverLoc);
+		createKeywordsFile(); //generates text file with the 4 desired search terms
 		
-		WebDriver cdriver = new ChromeDriver();
-		cdriver.get("http://www.google.com");
+		//Initializing Webdriver
+		System.setProperty("webdriver.chrome.driver", chromeDriverLoc);				 
+		cdriver = new ChromeDriver();
 		cdriver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		
-		WebElement mike = cdriver.findElement(By.id("lst-ib"));
-		String arg0 = "kargo";
-		mike.sendKeys(arg0 + Keys.RETURN);
+		googleSearch("kargo");
 		
+		navigate_KargoAbout_Page();
 		
+		googleSearch("kargo");
+		
+		ArrayList<String> keyWord_Cap = keyWord_Capture();
+		for(String keyWord : keyWord_Cap){
+			googleSearch(keyWord);
+		}
+	}
+	
+	public static void googleSearch(String searchTerm){
+		cdriver.get("http://www.google.com");
+		cdriver.findElement(By.id("lst-ib")).sendKeys(searchTerm + Keys.RETURN);
+	}
+	
+	public static void navigate_KargoAbout_Page(){
+		googleSearch("kargo");
 		cdriver.findElement(By.linkText("Website")).click();
-		
 		cdriver.findElement(By.className("nav-button__bar")).click();
 		cdriver.findElement(By.id("menu-item-6427")).click();
-		
-		cdriver.get("http://www.google.com");
-		WebElement me = cdriver.findElement(By.id("lst-ib"));
-		String arg1 = "kargo";
-		me.sendKeys(arg1 + Keys.RETURN);
-		
-		
-		// Mobile ad firm
-		// Mobile advertising
-		// Mobile marketing
-		// Mobile internet
-		createKeywordsFile();
-		ArrayList<String> keyWord_Cap = keyWord_Capture();
-		System.out.println(keyWord_Cap);
-		for(String keyWord : keyWord_Cap){
-			cdriver.get("http://www.google.com");
-			cdriver.findElement(By.id("lst-ib")).sendKeys(keyWord + Keys.RETURN);
-		}
 	}
 	
 	public static void createKeywordsFile() {
