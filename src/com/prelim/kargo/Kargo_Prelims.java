@@ -38,6 +38,18 @@ public class Kargo_Prelims {
 		cdriver.findElement(By.id("lst-ib")).sendKeys(search_Term + Keys.RETURN);
 	}
 	
+	public void create_Keywords_File() {
+		String[] key_Words = {"Mobile ad firm" , "Mobile advertising" , "Mobile marketing" , "Mobile internet"};
+		
+		try (FileWriter key_Word_File = new FileWriter(key_Words_Text_File)){
+			for(String key_Word : key_Words){
+				key_Word_File.write(key_Word + "\n");
+			}
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 	public void navigate_KargoAbout_Page_via_Google(){
 		google_Search("kargo");
 		cdriver.findElement(By.linkText("Website")).click();
@@ -45,33 +57,15 @@ public class Kargo_Prelims {
 		cdriver.findElement(By.id("menu-item-6427")).click();
 	}
 	
-	public void create_Keywords_File() {
-		String[] key_Words = {"Mobile ad firm" , "Mobile advertising" , "Mobile marketing" , "Mobile internet"};
-		FileWriter key_Word_File = null;
-		
-		try {
-			key_Word_File = new FileWriter(key_Words_Text_File);
-			for(String key_Word : key_Words){
-				key_Word_File.write(key_Word + "\n");
-			}
-			key_Word_File.close();
-		} catch (IOException e){
-			e.printStackTrace();
-		}
-	}
-	
 	public void search_Keywords_From_File(){
 		//Purposely wanted to use a dynamic array list for scalability
 		ArrayList<String> key_Words_Captured = new ArrayList<String>();
 		String file_Location = key_Words_Text_File;
-		Scanner file_Reader = null;
 		
-		try{
-			file_Reader = new Scanner(new File(file_Location));
+		try(Scanner file_Reader = new Scanner(new File(file_Location))){
 			while (file_Reader.hasNext()){
 				key_Words_Captured.add(file_Reader.nextLine());
 			}
-			file_Reader.close();
 		} catch (IOException e){
 			e.printStackTrace();
 		}	
