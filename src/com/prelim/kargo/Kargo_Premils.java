@@ -25,16 +25,11 @@ public class Kargo_Premils {
 		//Initializing Webdriver
 		System.setProperty("webdriver.chrome.driver", chromeDriverLoc);				 
 		cdriver = new ChromeDriver();
-		cdriver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		cdriver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		
 		googleSearch("kargo");
-		
 		navigate_KargoAbout_Page();
-		
-		googleSearch("kargo");
-		
-		ArrayList<String> keyWord_Cap = keyWord_Capture();
-		for(String keyWord : keyWord_Cap){
+		for(String keyWord : keyWord_Capture()){
 			googleSearch(keyWord);
 		}
 	}
@@ -67,6 +62,7 @@ public class Kargo_Premils {
 	}
 	
 	public static ArrayList<String> keyWord_Capture(){
+		//Purposely wanted to use a dynamic array list for scalability
 		ArrayList<String> keyWords_Captured = new ArrayList<String>();
 		String fileLocation = "Keywords.txt";
 		Scanner fileReader = null;
