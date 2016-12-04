@@ -12,18 +12,18 @@ public class Kargo_Premils  {
 
 	public static void main(String[] args) throws IOException {
 		
-		InputStreamReader cin = null;
+		// writing string to a file encoded as modified UTF-8
+	      DataOutputStream dataOut = new DataOutputStream(new FileOutputStream("file2016.txt"));
+	      dataOut.writeUTF("hello");
+	      dataOut.writeUTF("dez");
+	      dataOut.writeUTF("nuts");
 
-	      try {
-	         cin = new InputStreamReader(System.in);
-	         System.out.println("Enter characters, 'q' to quit.");
-	         char c;
-	         do {
-	            c = (char) cin.read();
-	            System.out.print(c);
-	         } while(c != 'q');
-	      }finally {
-	         if (cin != null) {
-	            cin.close();
-	         }
-	      }}}
+	      // Reading data from the same file
+	      DataInputStream dataIn = new DataInputStream(new FileInputStream("file2016.txt"));
+
+	      while(dataIn.available()>0) {
+	         String k = dataIn.readUTF();
+	         System.out.print(k+" ");
+	      }
+	   }
+	}
