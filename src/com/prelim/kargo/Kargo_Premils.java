@@ -6,30 +6,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import java.util.concurrent.TimeUnit;
+import java.io.*;
 
-public class Kargo_Premils {
+public class Kargo_Premils  {
 
-	public static void main(String[] args) {
-		String chromeDriverLoc = "/Users/NewUser/Downloads/Automation/chromedriver";
-		System.setProperty("webdriver.chrome.driver", chromeDriverLoc);
+	public static void main(String[] args) throws IOException {
 		
-		WebDriver cdriver = new ChromeDriver();
-		cdriver.get("http://www.google.com");
-		cdriver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-		
-		WebElement mike = cdriver.findElement(By.id("lst-ib"));
-		String arg0 = "kargo";
-		mike.sendKeys(arg0 + Keys.RETURN);
-		
-		
-		cdriver.findElement(By.linkText("Website")).click();
-		
-		cdriver.findElement(By.className("nav-button__bar")).click();
-		System.out.println(cdriver.findElement(By.id("menu-item-6427")).getText());
-		System.out.println("what the fuck");
-		//Keys ky = new Keys();
-		//mike.sendKeys(Keys.RETURN);
-		
-	}
+		InputStreamReader cin = null;
 
-}
+	      try {
+	         cin = new InputStreamReader(System.in);
+	         System.out.println("Enter characters, 'q' to quit.");
+	         char c;
+	         do {
+	            c = (char) cin.read();
+	            System.out.print(c);
+	         } while(c != 'q');
+	      }finally {
+	         if (cin != null) {
+	            cin.close();
+	         }
+	      }}}
