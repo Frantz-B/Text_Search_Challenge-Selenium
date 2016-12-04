@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class Kargo_Premils {
 
 	public static void main(String[] args) {
-		/*
+		
 		String chromeDriverLoc = "/Users/NewUser/Downloads/Automation/chromedriver";
 		System.setProperty("webdriver.chrome.driver", chromeDriverLoc);
 		
@@ -43,10 +43,14 @@ public class Kargo_Premils {
 		// Mobile ad firm
 		// Mobile advertising
 		// Mobile marketing
-		// Mobile internet */
+		// Mobile internet
 		createKeywordsFile();
 		ArrayList<String> keyWord_Cap = keyWord_Capture();
-		System.out.println(keyWord_Cap.size());
+		System.out.println(keyWord_Cap);
+		for(String keyWord : keyWord_Cap){
+			cdriver.get("http://www.google.com");
+			cdriver.findElement(By.id("lst-ib")).sendKeys(keyWord + Keys.RETURN);
+		}
 	}
 	
 	public static void createKeywordsFile() {
